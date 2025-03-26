@@ -3,17 +3,28 @@ import { Summary } from "./Summary";
 import { Education } from "./Education";
 import { Experience } from "./Experience";
 import {Skills} from "./Skills";
+import {GeneralInformationForm } from "./FormContainer";
 import "./styles.css";
+import {useState} from "react";
 
 function App() {
+  const [generalInfo, setGeneralInfo] = useState({
+    name:"",
+    phone:"",
+    email:"",
+    linkedIn:""
+  })
   return (
-    <div className="container">
-      <GeneralInfo name="John Doe" email="JohnDoe@gmail.com" phone="123-456-7890"/>
+    <>
+    <GeneralInformationForm generalInfo={generalInfo} setGeneralInfo={setGeneralInfo}/>
+    <div className="resume-container">
+      <GeneralInfo generalInfo={generalInfo}/>
       <Summary/>
       <Education/>
       <Experience/> 
       <Skills/>
     </div>
+    </>
   );
 }
 
