@@ -1,12 +1,14 @@
-
-export function GeneralInfo(props){
-    return(
-        <div className="general-info">
-            <h1>{props.name ? props.name : "John Doe"}</h1>
-            <div className="contact-info">
-                <p>{props.email ? props.email : "email"}</p>
-                <p>{props.phone ? props.phone : "phone"}</p>
-            </div>
+export function GeneralInfo({generalInfo}) {
+  return (
+    <>
+      <div className="general-info">
+        <h1>Name:{generalInfo.name}</h1>
+        <div className="contact-info">
+          <p>Email: {generalInfo.email}</p>
+          <p>Phone Number{generalInfo.phone}</p>
+          <p>LinkedIn: {generalInfo.linkedIn}</p>
         </div>
-    )
+      </div>
+    </>
+  );
 }
