@@ -4,9 +4,18 @@ export function Experience(props) {
       <h2>EXPERIENCE</h2>
       <hr />
       <div className="job-info">
-        <p>
-          {props.jobTitle ? props.jobTitle : "Job Title"} <span>Location</span>
-        </p>
+        <div className="company-details">
+          {props.companyName ? props.companyName : "Company Name"}
+          <span className="location">Location</span>
+          <div className="job-title">
+            {props.jobTitle ? props.jobTitle : "Job Title"}
+            <span className="date">Date</span>
+          </div>
+        </div>
+        <ul>
+          <li>accomplished x by doing y measured by z</li>
+          <li>accomplished x by doing y measured by z</li>
+        </ul>
       </div>
     </div>
   );
