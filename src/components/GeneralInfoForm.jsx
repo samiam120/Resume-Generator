@@ -10,6 +10,7 @@ export default function GeneralInfoForm({ generalInfo, setGeneralInfo }) {
   
   return (
     <div className="general-info-form">
+      <h2>GENERAL</h2>
       <label htmlFor="form-name">name</label>
       <input
         type="text"
