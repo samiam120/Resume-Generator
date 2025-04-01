@@ -1,15 +1,15 @@
-export function Experience(props) {
+export function Experience({experienceInfo}) {
   return (
     <div className="experience">
       <h2>EXPERIENCE</h2>
       <hr />
       <div className="job-info">
         <div className="company-details">
-          {props.companyName ? props.companyName : "Company Name"}
-          <span className="location">Location</span>
+          {experienceInfo.companyName ? experienceInfo.companyName : "Company Name"}
+          <span className="location">{experienceInfo.location ? experienceInfo.location : "Location"}</span>
           <div className="job-title">
-            {props.jobTitle ? props.jobTitle : "Job Title"}
-            <span className="date">Date</span>
+            {experienceInfo.jobTitle ? experienceInfo.jobTitle : "Job Title"}
+            <span className="date">{experienceInfo.date ? experienceInfo.date : "Date"}</span>
           </div>
         </div>
         <ul>
