@@ -1,4 +1,8 @@
+import { useState } from "react";
+import { v4 as uuidv4 } from "uuid";
+
 export function ExperienceForm({ experienceInfo, updateExperience }) {
+  const [responsibility, setResponsibility] = useState("");
   const handleChange = (event) => {
     const { name, value } = event.target;
     updateExperience((previousState) => ({
@@ -7,6 +11,17 @@ export function ExperienceForm({ experienceInfo, updateExperience }) {
     }));
   };
 
+  const handleAddResponsibility = () => {
+    const newResponsibility = {
+      id: uuidv4(),
+      text: responsibility,
+    };
+    updateExperience((previousState) => ({
+      ...previousState,
+      responsibilities: [...previousState.responsibilities, newResponsibility],
+    }));
+    setResponsibility("");
+  };
   return (
     <div className="experience-form">
       <h2>EXPERIENCE</h2>
@@ -42,6 +57,22 @@ export function ExperienceForm({ experienceInfo, updateExperience }) {
         value={experienceInfo.date}
         onChange={handleChange}
       />
+      <label htmlFor="">responsibilities</label>
+      <div className="responsibilities">
+        <input
+          type="text"
+          name="responsibilities"
+          id="responsibilities"
+          value={responsibility}
+          onChange={(e) => setResponsibility(e.target.value)}
+        />
+        <button
+          disabled={responsibility === ""}
+          onClick={handleAddResponsibility}
+        >
+          add
+        </button>
+      </div>
     </div>
   );
 }

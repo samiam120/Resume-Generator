@@ -1,4 +1,5 @@
 export function Experience({experienceInfo}) {
+  const bullets = experienceInfo.responsibilities.map((responsibility) => <li key={responsibility.id}>{responsibility.text}</li>)
   return (
     <div className="experience">
       <h2>EXPERIENCE</h2>
@@ -13,8 +14,7 @@ export function Experience({experienceInfo}) {
           </div>
         </div>
         <ul>
-          <li>accomplished x by doing y measured by z</li>
-          <li>accomplished x by doing y measured by z</li>
+          {bullets}
         </ul>
       </div>
     </div>
