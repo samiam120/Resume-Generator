@@ -1,11 +1,43 @@
-
+h1{
+    padding: 0;
+    margin: 0;
+}
 body {
     margin: 0;
     padding: 0;
-    width: 100%;
-    height: 100vh;
 }
 
+.container{
+    display: grid;
+    grid-template-columns: 450px minmax(500px, 1fr);
+    gap: 20px;
+    margin: 5px 10px;
+}
+
+.resume-container{
+    width: 8.5in;
+    height: 11in;
+    overflow: auto;
+    margin: 20px auto;
+    padding: 20px;
+    border: 1px solid black;
+}
+
+.general-info-form, 
+.summary-form, 
+.education-form,
+.experience-form
+{
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+.school-info{
+    border: 1px solid pink;
+}
+.location, .date{
+    float: right;
+}
 
 @media only screen and (max-width: 768px){
     body{
