@@ -1,44 +1,65 @@
-import { useState } from "react";
 import { v4 as uuidv4 } from "uuid";
+import { useState } from "react";
 
-export function ExperienceForm({ experienceInfo, updateExperience }) {
+export function ExperienceForm({
+  job,
+  updateJob,
+  setExperienceList,
+}) {
   const [responsibility, setResponsibility] = useState("");
+
   const handleChange = (event) => {
     const { name, value } = event.target;
-    updateExperience((previousState) => ({
-      ...previousState,
+    updateJob((prevJob) => ({
+      ...prevJob,
       [name]: value,
     }));
   };
 
+  const handleUpdateResponsibility = (id, newText) => {
+    updateJob((prev) => ({
+      ...prev,
+      responsibilities: prev.responsibilities.map((r) =>( 
+        r.id === id ? { ...r, text: newText } : r
+      )),
+    }));
+  };
+
   const handleAddResponsibility = () => {
-    const newResponsibility = {
+    const newResp = {
       id: uuidv4(),
       text: responsibility,
     };
-    updateExperience((previousState) => ({
-      ...previousState,
-      responsibilities: [...previousState.responsibilities, newResponsibility],
+    updateJob((prevJob) => ({
+      ...prevJob,
+      responsibilities: [...prevJob.responsibilities, newResp],
     }));
     setResponsibility("");
   };
+
+  const handleAddExperience = () => {
+    setExperienceList((prevList) => [...prevList, job]);
+    updateJob({ ...job, id: uuidv4() });
+    setResponsibility("");
+  };
+
   return (
     <div className="experience-form">
       <h2>EXPERIENCE</h2>
-      <label htmlFor="company-name">Company</label>
+      <label htmlFor="company-name">Company Name</label>
       <input
         type="text"
         id="company-name"
         name="companyName"
-        value={experienceInfo.companyName}
+        value={job.companyName}
         onChange={handleChange}
       />
-      <label htmlFor="company-location">Location</label>
+      <label htmlFor="location">Location</label>
       <input
         type="text"
-        id="company-location"
+        id="location"
         name="location"
-        value={experienceInfo.location}
+        value={job.location}
         onChange={handleChange}
       />
       <label htmlFor="job-title">Job Title</label>
@@ -46,33 +67,49 @@ export function ExperienceForm({ experienceInfo, updateExperience }) {
         type="text"
         id="job-title"
         name="jobTitle"
-        value={experienceInfo.jobTitle}
+        value={job.jobTitle}
         onChange={handleChange}
       />
-      <label htmlFor="company-duration">Date</label>
+      <label htmlFor="date">Date</label>
       <input
         type="text"
-        id="company-duration"
+        id="date"
         name="date"
-        value={experienceInfo.date}
+        value={job.date}
         onChange={handleChange}
       />
-      <label htmlFor="">responsibilities</label>
-      <div className="responsibilities">
+      <label htmlFor="responsibility">Responsibilities</label>
+      <div className="responsibilities-div">
         <input
           type="text"
-          name="responsibilities"
           id="responsibilities"
+          name="responsibilities"
           value={responsibility}
           onChange={(e) => setResponsibility(e.target.value)}
         />
         <button
-          disabled={responsibility === ""}
+          type="button"
           onClick={handleAddResponsibility}
+          disabled={responsibility === ""}
         >
-          add
+          Add Responsibility
         </button>
       </div>
+
+      <ul>
+        {job.responsibilities.map((r) => (
+          <li key={r.id}>
+            <input
+              value={r.text}
+              onChange={(e) => handleUpdateResponsibility(r.id, e.target.value)}
+            />
+          </li>
+        ))}
+      </ul>
+
+      <button type="button" onClick={handleAddExperience}>
+        Add Experience
+      </button>
     </div>
   );
 }
