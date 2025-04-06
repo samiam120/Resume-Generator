@@ -1,12 +1,12 @@
 import { v4 as uuidv4 } from "uuid";
-import { useState } from "react";
 
 export function ExperienceForm({
   job,
   updateJob,
   setExperienceList,
+  responsibility,
+  setResponsibility
 }) {
-  const [responsibility, setResponsibility] = useState("");
 
   const handleChange = (event) => {
     const { name, value } = event.target;
@@ -79,7 +79,7 @@ export function ExperienceForm({
         onChange={handleChange}
       />
       <label htmlFor="responsibility">Responsibilities</label>
-      <div className="responsibilities-div">
+      <div className="responsibilities-form-div">
         <input
           type="text"
           id="responsibilities"
