@@ -1,4 +1,4 @@
-export function Experience({experienceInfo}) {
+export function Experience({experienceInfo, handleEditExperience}) {
   const bullets = experienceInfo.responsibilities.map((responsibility) => <li key={responsibility.id}>{responsibility.text}</li>)
 
   return (
@@ -21,6 +21,7 @@ export function Experience({experienceInfo}) {
           </ul>
         </div>
       </div>
+      <button onClick={() => handleEditExperience(experienceInfo.id)}>Edit</button>
     </div>
   );
 }

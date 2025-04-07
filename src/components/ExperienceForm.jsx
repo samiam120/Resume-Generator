@@ -3,11 +3,11 @@ import { v4 as uuidv4 } from "uuid";
 export function ExperienceForm({
   job,
   updateJob,
+  experienceList,
   setExperienceList,
   responsibility,
-  setResponsibility
+  setResponsibility,
 }) {
-
   const handleChange = (event) => {
     const { name, value } = event.target;
     updateJob((prevJob) => ({
@@ -19,9 +19,9 @@ export function ExperienceForm({
   const handleUpdateResponsibility = (id, newText) => {
     updateJob((prev) => ({
       ...prev,
-      responsibilities: prev.responsibilities.map((r) =>( 
+      responsibilities: prev.responsibilities.map((r) =>
         r.id === id ? { ...r, text: newText } : r
-      )),
+      ),
     }));
   };
 
@@ -36,10 +36,24 @@ export function ExperienceForm({
     }));
     setResponsibility("");
   };
+  const isEditing = experienceList.some((j) => j.id === job.id);
 
   const handleAddExperience = () => {
-    setExperienceList((prevList) => [...prevList, job]);
-    updateJob({ ...job, id: uuidv4() });
+    if (isEditing) {
+      setExperienceList((prevList) =>
+        prevList.map((j) => (j.id === job.id ? job : j))
+      );
+    } else {
+      setExperienceList((prevList) => [...prevList, job]);
+    }
+    updateJob({
+      id: uuidv4(),
+      companyName: "",
+      location: "",
+      jobTitle: "",
+      date: "",
+      responsibilities: [],
+    });
     setResponsibility("");
   };
 
@@ -108,7 +122,7 @@ export function ExperienceForm({
       </ul>
 
       <button type="button" onClick={handleAddExperience}>
-        Add Experience
+        {isEditing ? "Save Changes" : "Add Experience"}
       </button>
     </div>
   );
