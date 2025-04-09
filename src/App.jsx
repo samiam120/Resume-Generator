@@ -40,6 +40,15 @@ function App() {
     responsibilities: [],
   });
 
+  const [responsibility, setResponsibility] = useState("");
+
+  const handleEditExperience = (id) => {
+    const jobToEdit = experienceList.find((job) => job.id == id);
+    updateCurrentJob(jobToEdit);
+
+  }
+
+
   return (
     <div className="container">
       <div className="form-container">
@@ -57,6 +66,8 @@ function App() {
           updateJob={updateCurrentJob}
           experienceList={experienceList}
           setExperienceList={setExperienceList}
+          responsibility={responsibility}
+          setResponsibility={setResponsibility}
         />
       </div>
       <div className="resume-container">
@@ -65,9 +76,12 @@ function App() {
         <Education educationInfo={education} />
         <h2>EXPERIENCE</h2>
         {experienceList.map((job) => (
-          <Experience key={job.id} experienceInfo={job} />
+          <Experience key={job.id} experienceInfo={job} 
+          handleEditExperience={handleEditExperience}
+          />
         ))}
-        <Experience experienceInfo={currentJob} />
+        <Experience experienceInfo={{...currentJob, responsibilityPreview:responsibility}} 
+        />
         <Skills />
       </div>
     </div>
