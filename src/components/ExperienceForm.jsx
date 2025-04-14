@@ -57,6 +57,13 @@ export function ExperienceForm({
     setResponsibility("");
   };
 
+  const handleDeleteResponsibility = (id) => {
+    updateJob((prev) => ({
+      ...prev,
+      responsibilities: prev.responsibilities.filter((r) => r.id !== id),
+    }));
+  };
+
   return (
     <div className="experience-form">
       <h2>EXPERIENCE</h2>
@@ -117,6 +124,12 @@ export function ExperienceForm({
               value={r.text}
               onChange={(e) => handleUpdateResponsibility(r.id, e.target.value)}
             />
+            <button
+              type="button"
+              onClick={() => handleDeleteResponsibility(r.id)}
+            >
+              ❌
+            </button>
           </li>
         ))}
       </ul>
