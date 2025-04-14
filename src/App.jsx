@@ -45,8 +45,17 @@ function App() {
   const handleEditExperience = (id) => {
     const jobToEdit = experienceList.find((job) => job.id == id);
     updateCurrentJob(jobToEdit);
+  };
 
-  }
+  const isEditing = experienceList.some((j) => j.id === currentJob.id);
+
+  const jobHasContent =
+  currentJob.companyName.trim() !== "" ||
+  currentJob.location.trim() !== "" ||
+  currentJob.jobTitle.trim() !== "" ||
+  currentJob.date.trim() !== "" ||
+  currentJob.responsibilities.length > 0 ||
+  responsibility.trim() !== "";
 
 
   return (
@@ -75,13 +84,26 @@ function App() {
         <Summary summary={summary} />
         <Education educationInfo={education} />
         <h2>EXPERIENCE</h2>
-        {experienceList.map((job) => (
-          <Experience key={job.id} experienceInfo={job} 
-          handleEditExperience={handleEditExperience}
+        {experienceList.map((job) => {
+          const isBeingEdited = job.id === currentJob.id && isEditing;
+          return (
+            <Experience
+              key={job.id}
+              experienceInfo={isBeingEdited ? { ...currentJob } : job}
+              handleEditExperience={handleEditExperience}
+            />
+          );
+        })}
+
+        {!isEditing && jobHasContent && (
+          <Experience
+            experienceInfo={{
+              ...currentJob,
+              responsibilityPreview: responsibility,
+            }}
           />
-        ))}
-        <Experience experienceInfo={{...currentJob, responsibilityPreview:responsibility}} 
-        />
+        )}
+
         <Skills />
       </div>
     </div>
