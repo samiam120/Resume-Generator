@@ -127,9 +127,7 @@ export function ExperienceForm({
             <button
               type="button"
               onClick={() => handleDeleteResponsibility(r.id)}
-            >
-              ❌
-            </button>
+            >delete</button>
           </li>
         ))}
       </ul>
