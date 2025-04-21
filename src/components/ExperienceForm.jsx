@@ -125,9 +125,12 @@ export function ExperienceForm({
               onChange={(e) => handleUpdateResponsibility(r.id, e.target.value)}
             />
             <button
+              className="delete-btn"
               type="button"
               onClick={() => handleDeleteResponsibility(r.id)}
-            >delete</button>
+            >
+              delete
+            </button>
           </li>
         ))}
       </ul>
