@@ -11,7 +11,7 @@ import { EducationForm } from "./components/EducationForm.jsx";
 import "./styles.css";
 import { useState } from "react";
 import { ExperienceForm } from "./components/ExperienceForm.jsx";
-
+import { SkillsForm } from "./components/SkillsForm.jsx";
 function App() {
   const [generalInfo, setGeneralInfo] = useState({
     name: "John Doe",
@@ -47,16 +47,33 @@ function App() {
     updateCurrentJob(jobToEdit);
   };
 
+  const handleDeleteExperience = (id) => {
+    setExperienceList((prevList) => prevList.filter((job) => job.id !== id));
+
+    // Optional: clear currentJob if you were editing the deleted job
+    if (currentJob.id === id) {
+      updateCurrentJob({
+        id: uuidv4(),
+        companyName: "",
+        location: "",
+        jobTitle: "",
+        date: "",
+        responsibilities: [],
+      });
+    }
+  };
+
   const isEditing = experienceList.some((j) => j.id === currentJob.id);
 
   const jobHasContent =
-  currentJob.companyName.trim() !== "" ||
-  currentJob.location.trim() !== "" ||
-  currentJob.jobTitle.trim() !== "" ||
-  currentJob.date.trim() !== "" ||
-  currentJob.responsibilities.length > 0 ||
-  responsibility.trim() !== "";
+    currentJob.companyName.trim() !== "" ||
+    currentJob.location.trim() !== "" ||
+    currentJob.jobTitle.trim() !== "" ||
+    currentJob.date.trim() !== "" ||
+    currentJob.responsibilities.length > 0 ||
+    responsibility.trim() !== "";
 
+    const [skillList, setSkillList] = useState([]);
 
   return (
     <div className="container">
@@ -78,6 +95,11 @@ function App() {
           responsibility={responsibility}
           setResponsibility={setResponsibility}
         />
+        <h2>SKILLS</h2>
+        <SkillsForm 
+        skillList={skillList}
+        setSkillList={setSkillList}
+        />
       </div>
       <div className="resume-container">
         <GeneralInfo generalInfo={generalInfo} />
@@ -86,11 +108,14 @@ function App() {
         <h2>EXPERIENCE</h2>
         {experienceList.map((job) => {
           const isBeingEdited = job.id === currentJob.id && isEditing;
+
           return (
             <Experience
               key={job.id}
-              experienceInfo={isBeingEdited ? { ...currentJob } : job}
+              experienceInfo={isBeingEdited ? currentJob : job}
               handleEditExperience={handleEditExperience}
+              handleDeleteExperience={handleDeleteExperience}
+              isPreviewOnly={false}
             />
           );
         })}
@@ -101,10 +126,13 @@ function App() {
               ...currentJob,
               responsibilityPreview: responsibility,
             }}
+            isPreviewOnly={true}
           />
         )}
-
-        <Skills />
+        <h2>SKILLS</h2>
+        <Skills
+        skillList={skillList}
+        />
       </div>
     </div>
   );
