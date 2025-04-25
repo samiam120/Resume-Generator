@@ -50,14 +50,14 @@ body {
   border: 1px solid black;
 }
 
-@media only screen and (max-width: 640px) {
-  .form-container,
-  .resume-container {
-    width: 100%;
-  }
-  .container {
-    flex-direction: column;
-  }
+@media only screen and (max-width: 840px){
+    .form-container,
+    .resume-container{
+        width: 100%;
+    }
+    .container{
+        flex-direction: column;
+    }
 }
 
 h1,
@@ -113,18 +113,19 @@ textarea {
 }
 
 .experience-controls {
+
 }
 
-.company-name {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+.company-name{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 
-.experience-controls button {
-  padding: 0.25rem 0.5rem;
-  font-size: 0.85rem;
-  line-height: 1;
+.experience-controls button{
+    padding: 0.25rem 0.5rem;
+    font-size: 0.85rem;
+    line-height: 1;
 }
 
 .preview-draft {
@@ -142,16 +143,18 @@ textarea {
   text-align: center;
 }
 
+
 .contact-info p {
   margin: 2px 0;
   font-size: 0.95rem;
   color: var(--text-color);
 }
 
-.contact-info {
-  display: flex;
-  justify-content: space-evenly;
-  align-items: center;
+
+.contact-info{
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
 }
 
 .summary p {
@@ -174,8 +177,8 @@ li {
   margin-bottom: 0.4rem;
 }
 
-a {
-  color: blue;
+a{
+    color: blue;
 }
 
 button {
