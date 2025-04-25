@@ -2,7 +2,6 @@ export function Education({ educationInfo }) {
   return (
     <div className="education">
       <h2>EDUCATION</h2>
-      <hr />
       <div className="school-info">
         <span className="school-name">
           {educationInfo.schoolName ? educationInfo.schoolName : ""}
