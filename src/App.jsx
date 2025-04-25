@@ -106,6 +106,7 @@ function App() {
         <Summary summary={summary} />
         <Education educationInfo={education} />
         <h2>EXPERIENCE</h2>
+        <hr />
         {experienceList.map((job) => {
           const isBeingEdited = job.id === currentJob.id && isEditing;
 
