@@ -1,4 +1,3 @@
-https://sage-pothos-92873d.netlify.app/
 A web-based resume generator built with React, using Vite as the development server.
 
 Features
