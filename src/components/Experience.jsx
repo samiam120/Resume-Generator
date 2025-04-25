@@ -12,12 +12,26 @@ export function Experience({
     <div className="experience">
       <div className="job-info">
         <div className="company-details">
-          {experienceInfo.companyName
-            ? experienceInfo.companyName
-            : "Company Name"}
-          <span className="location">
-            {experienceInfo.location ? experienceInfo.location : "Location"}
-          </span>
+          <div className="company-name">
+            {experienceInfo.companyName
+              ? experienceInfo.companyName
+              : "Company Name"}
+            {!isPreviewOnly && (
+              <div className="experience-controls">
+                <button onClick={() => handleEditExperience(experienceInfo.id)}>
+                  Edit
+                </button>
+                <button
+                  onClick={() => handleDeleteExperience(experienceInfo.id)}
+                >
+                  Delete
+                </button>
+              </div>
+            )}
+            <span className="location">
+              {experienceInfo.location ? experienceInfo.location : "Location"}
+            </span>
+          </div>
           <div className="job-title">
             {experienceInfo.jobTitle ? experienceInfo.jobTitle : "Job Title"}
             <span className="date">
@@ -36,16 +50,6 @@ export function Experience({
           </ul>
         </div>
       </div>
-      {!isPreviewOnly && (
-        <div className="experience-controls">
-          <button onClick={() => handleEditExperience(experienceInfo.id)}>
-            Edit
-          </button>
-          <button onClick={() => handleDeleteExperience(experienceInfo.id)}>
-            Delete
-          </button>
-        </div>
-      )}
     </div>
   );
 }
